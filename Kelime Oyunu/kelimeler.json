@@ -1,0 +1,44 @@
+{
+    "4": [
+        { "kelime": "yoga", "soru": "Vücut, zihin ve ruhu birleştiren bir uygulama nedir?" },
+        { "kelime": "kaya", "soru": "Dağlık arazilerde bulunan büyük taş kütlesi nedir?" },
+        { "kelime": "akıl", "soru": "Zekanın ve mantığın diğer adı nedir?" },
+        { "kelime": "bile", "soru": "Bir şeyi daha fazla vurgulamak için kullanılan bağlaç nedir?" }
+    ],
+    "5": [
+        { "kelime": "haber", "soru": "İletişim araçlarıyla aktarılan bilgi nedir?" },
+        { "kelime": "diken", "soru": "Bitkilerde koruma amacıyla oluşan sivri uç nedir?" },
+        { "kelime": "sanat", "soru": "Yaratıcı ve estetik ifade biçimi nedir?" },
+        { "kelime": "kanat", "soru": "Kuşların uçmasını sağlayan organ nedir?" }
+    ],
+    "6": [
+        { "kelime": "kitap", "soru": "Bilgi veya hikaye içeren basılı eser nedir?" },
+        { "kelime": "bahçevan", "soru": "Bitki yetiştiren ve bakımını yapan kişi kimdir?" },
+        { "kelime": "orman", "soru": "Ağaçların yoğun olarak bulunduğu alan nedir?" },
+        { "kelime": "kaleci", "soru": "Futbol oyununda kaleyi koruyan oyuncu kimdir?" }
+    ],
+    "7": [
+        { "kelime": "elbise", "soru": "Giyim eşyası nedir?" },
+        { "kelime": "şehirler", "soru": "Büyük ve kalabalık yerleşim alanları nelerdir?" },
+        { "kelime": "pazarlık", "soru": "Alışveriş sırasında yapılan fiyat görüşmesi nedir?" },
+        { "kelime": "gökkuşağı", "soru": "Yağmur sonrası gökyüzünde görülen renkli yay nedir?" }
+    ],
+    "8": [
+        { "kelime": "üniversite", "soru": "Yükseköğretim kurumu nedir?" },
+        { "kelime": "kütüphane", "soru": "Kitapların bulunduğu ve okunduğu yer nedir?" },
+        { "kelime": "mücevherat", "soru": "Değerli taş ve metallerden yapılan süs eşyaları nedir?" },
+        { "kelime": "yazılım", "soru": "Bilgisayar programları geliştirme sanatı nedir?" }
+    ],
+    "9": [
+        { "kelime": "bilgisayar", "soru": "Veri işleme ve saklama cihazı nedir?" },
+        { "kelime": "girişimci", "soru": "Yeni iş kurma riskini üstlenen kişi nedir?" },
+        { "kelime": "kitaplık", "soru": "Kitapların saklandığı mobilya nedir?" },
+        { "kelime": "öğretmen", "soru": "Öğrencilere bilgi aktaran kişi kimdir?" }
+    ],
+    "10": [
+        { "kelime": "çalışkanlık", "soru": "Düzenli ve gayretli çalışma özelliği nedir?" },
+        { "kelime": "pazarlamacı", "soru": "Ürün ve hizmetlerin tanıtımını yapan kişi kimdir?" },
+        { "kelime": "motivasyon", "soru": "Bir işi yapmak için içsel güdü nedir?" },
+        { "kelime": "girişimcilik", "soru": "Yeni iş kurma becerisi nedir?" }
+    ]
+}
