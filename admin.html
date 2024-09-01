@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin Paneli</h1>
+
+        <section id="add-question">
+            <h2>Yeni Soru Ekle</h2>
+            <form id="addQuestionForm">
+                <label for="category">Kategori:</label>
+                <select id="category" name="category">
+                    <option value="4">4 Harfli</option>
+                    <option value="5">5 Harfli</option>
+                    <option value="6">6 Harfli</option>
+                    <option value="7">7 Harfli</option>
+                    <option value="8">8 Harfli</option>
+                    <option value="9">9 Harfli</option>
+                    <option value="10">10 Harfli</option>
+                </select>
+                <label for="word">Kelime:</label>
+                <input type="text" id="word" name="word" required>
+                <label for="question">Soru:</label>
+                <input type="text" id="question" name="question" required>
+                <button type="submit">Ekle</button>
+            </form>
+        </section>
+
+        <section id="remove-question">
+            <h2>Soru Sil</h2>
+            <form id="removeQuestionForm">
+                <label for="removeCategory">Kategori:</label>
+                <select id="removeCategory" name="removeCategory">
+                    <!-- Kategoriler buraya gelecek -->
+                    <option value="4">4 Harfli</option>
+                    <option value="5">5 Harfli</option>
+                    <option value="6">6 Harfli</option>
+                    <option value="7">7 Harfli</option>
+                    <option value="8">8 Harfli</option>
+                    <option value="9">9 Harfli</option>
+                    <option value="10">10 Harfli</option>
+                </select>
+                <label for="removeQuestion">Soru:</label>
+                <select id="removeQuestion" name="removeQuestion">
+                    <!-- Sorular buraya gelecek -->
+                </select>
+                <button type="submit">Sil</button>
+            </form>
+        </section>
+
+        <button onclick="location.href='start.html'">Geri</button>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
