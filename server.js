@@ -14,7 +14,8 @@ const db = mysql.createConnection({
     host: 'sql7.freesqldatabase.com',
     user: 'sql7730890',
     password: '8D3wwHwmjv', // Kendi MySQL şifrenizi buraya girin
-    database: 'sql7730890'
+    database: 'sql7730890',
+    port: '3306'
 });
 
 db.connect((err) => {
