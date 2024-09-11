@@ -1,8 +1,11 @@
 /* Genel stil ayarları */
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffde96;
-    color: #333;
+    background-image: url(images/arkaplan1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #ffffff;
     margin: 0;
     padding: 0;
     display: flex;
@@ -20,7 +23,7 @@ body {
 
 /* Başlık stili */
 h1 {
-    color: #000000;
+    color: #ffffff;
     margin-bottom: 10px; /* Liste ile araya boşluk bırak */
 }
 
@@ -34,13 +37,13 @@ h1 {
 
 /* Liste öğesi stili */
 #scoreList li {
-    background-image:url(images/3dbuton.png);
+    background-image:url(images/red.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     text-align: center;
     padding: 10px;
-    color: #000000;
+    color: #ffffff;
     max-height: 30px;
     margin-bottom: 15px;
     display: flex;

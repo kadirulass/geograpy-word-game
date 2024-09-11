@@ -11,10 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // MySQL bağlantısı
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'kadir.4937', // Kendi MySQL şifrenizi buraya girin
-    database: 'question_game'
+    host: 'sql7.freesqldatabase.com',
+    user: 'sql7730890',
+    password: '8D3wwHwmjv', // Kendi MySQL şifrenizi buraya girin
+    database: 'sql7730890'
 });
 
 db.connect((err) => {
