@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://localhost:3306/get-scores')
+    fetch('https://cografya-kelime-oyunu.onrender.com/get-scores')
         .then(response => response.json())
         .then(data => {
             const scoreList = document.getElementById('scoreList');

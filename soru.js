@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 
     // Veritabanından kelimeleri yükle
-    fetch('http://localhost:3306/get-questions')
+    fetch('https://cografya-kelime-oyunu.onrender.com/get-questions')
         .then(response => response.json())
         .then(data => {
             // Verileri kelimeler objesine dönüştürme
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Skoru veritabanına gönder
         const kullaniciAdi = prompt('Kullanıcı adınızı girin:');
         if (kullaniciAdi) {
-            fetch('http://localhost:3306/add-score', {
+            fetch('https://cografya-kelime-oyunu.onrender.com/add-score', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const kelime = document.getElementById('kelime').value;
             const soru = document.getElementById('soru').value;
 
-            fetch('http://localhost:3306/add-question', {
+            fetch('https://cografya-kelime-oyunu.onrender.com/add-question', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
