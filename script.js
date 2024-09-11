@@ -14,7 +14,7 @@ let kalanHarfSayisi = 0; // Kalan harf sayısını takip edeceğiz
 let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 
 // Veritabanından kelimeleri yükle
-fetch('http://localhost:3009/get-questions')
+fetch('http://localhost:3306/get-questions')
     .then(response => response.json())
     .then(data => {
         kelimeler = data.reduce((acc, item) => {
@@ -155,7 +155,7 @@ function oyunBitti() {
     clearInterval(sureInterval);
     const kullaniciAdi = prompt('Oyun bitti! Kullanıcı adınızı girin:');
     if (kullaniciAdi) {
-        fetch('http://localhost:3009/add-score', {
+        fetch('http://localhost:3306/add-score', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

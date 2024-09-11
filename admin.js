@@ -5,7 +5,7 @@ document.getElementById('addQuestionForm').addEventListener('submit', function(e
     const word = document.getElementById('word').value;
     const question = document.getElementById('question').value;
 
-    fetch('http://localhost:3009/add-question', {
+    fetch('http://localhost:3306/add-question', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ document.getElementById('removeQuestionForm').addEventListener('submit', functio
 
     const id = document.getElementById('removeQuestion').value;
 
-    fetch('http://localhost:3009/remove-question', {
+    fetch('http://localhost:3306/remove-question', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ document.getElementById('removeQuestionForm').addEventListener('submit', functio
 document.getElementById('removeCategory').addEventListener('change', function() {
     const category = this.value;
 
-    fetch(`http://localhost:3009/get-questions/${category}`)
+    fetch(`http://localhost:3306/get-questions/${category}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

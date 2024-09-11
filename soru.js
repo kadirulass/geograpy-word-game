@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 
     // Veritabanından kelimeleri yükle
-    fetch('http://localhost:3008/get-questions')
+    fetch('http://localhost:3306/get-questions')
         .then(response => response.json())
         .then(data => {
             // Verileri kelimeler objesine dönüştürme
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Skoru veritabanına gönder
         const kullaniciAdi = prompt('Kullanıcı adınızı girin:');
         if (kullaniciAdi) {
-            fetch('http://localhost:3008/add-score', {
+            fetch('http://localhost:3306/add-score', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const kelime = document.getElementById('kelime').value;
             const soru = document.getElementById('soru').value;
 
-            fetch('http://localhost:3008/add-question', {
+            fetch('http://localhost:3306/add-question', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

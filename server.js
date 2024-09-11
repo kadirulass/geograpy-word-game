@@ -131,7 +131,7 @@ app.get('/get-scores', (req, res) => {
 
 
 // Sunucu portu
-const PORT = 3009;
+const PORT = 3306;
 app.listen(PORT, () => {
     console.log(`Sunucu ${PORT} portunda çalışıyor`);
 });
