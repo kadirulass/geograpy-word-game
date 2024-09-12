@@ -11,7 +11,7 @@ body {
     
 }
 .index{
-    background:url("/images/pxfuel.jpg");
+    background:url("images/pxfuel.jpg");
     background-size: cover; /* Resmi kapsayıcı olacak şekilde esnetir */
     background-position: center; /* Resmi ortalar */
     background-repeat: no-repeat; /* Resmin tekrarlanmasını önler */
