@@ -9,6 +9,14 @@ app.use(cors()); // CORS'u ekleyin
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Statik dosyaların bulunduğu dizini belirtin
+app.use(express.static(path.join(__dirname, 'static')));
+
+// Eğer index.html'yi doğrudan ana sayfa olarak sunmak istiyorsanız:
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'static', 'start.html'));
+});
+
 // MySQL bağlantısı
 const db = mysql.createConnection({
     host: 'sql7.freesqldatabase.com',
