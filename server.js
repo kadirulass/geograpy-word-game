@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // CORS ayarları için
+const path = require('path');
 
 const app = express();
 
@@ -10,11 +11,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Statik dosyaların bulunduğu dizini belirtin
-app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname,)));
 
 // Eğer index.html'yi doğrudan ana sayfa olarak sunmak istiyorsanız:
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'static', 'start.html'));
+  res.sendFile(path.join(__dirname, 'start.html'));
 });
 
 // MySQL bağlantısı
