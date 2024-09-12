@@ -3,24 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelime Oyunu</title>
+    <title>Coğrafya Kelime Oyunu - Giriş</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="index">
-    <div class="game-container">
-        <h1>Kelime Oyunu</h1>
-        <div id="wordDisplay"></div>
-        <p>Puan: <span id="scoreDisplay">0</span></p>
-        <button id="buyLetterBtn">Harf Satın Al</button>
-        <button id="guessWordBtn">Tahmin Et</button>
-        <div id="guessSection" style="display: none;">
-            <input type="text" id="guessInput" placeholder="Tahmininizi yazın">
-            <button id="submitGuessBtn">Gönder</button>
-        </div>
-        <p id="timeDisplay">Kalan Süre: 04:00</p>
+<body style="background-image: url(images/arkaplan1.jpg); background-size: cover; background-attachment: fixed; background-repeat: no-repeat; background-position: center;">
+    <div class="login-container">
+        <h1>Coğrafya Kelime Oyunu</h1>
+        <button onclick="location.href='game.html'">Oyunu Başlat</button>
+        <button onclick="location.href='about.html'">Oyun Hakkında</button>
+        <button onclick="location.href='highscores.html'">Skor Tablosu</button>
+        <button onclick="location.href='login.html'">Admin Giriş</button>
     </div>
-    <div id="questionCounter">Soru: 1 / 12</div>
-
-    <script src="/script.js"></script>
 </body>
 </html>
+
+  

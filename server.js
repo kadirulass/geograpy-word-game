@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname,)));
 
 // Eğer index.html'yi doğrudan ana sayfa olarak sunmak istiyorsanız:
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'start.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // MySQL bağlantısı

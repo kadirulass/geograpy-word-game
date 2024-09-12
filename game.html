@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelime Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="index">
+    <div class="game-container">
+        <h1>Kelime Oyunu</h1>
+        <div id="wordDisplay"></div>
+        <p>Puan: <span id="scoreDisplay">0</span></p>
+        <button id="buyLetterBtn">Harf Satın Al</button>
+        <button id="guessWordBtn">Tahmin Et</button>
+        <div id="guessSection" style="display: none;">
+            <input type="text" id="guessInput" placeholder="Tahmininizi yazın">
+            <button id="submitGuessBtn">Gönder</button>
+        </div>
+        <p id="timeDisplay">Kalan Süre: 04:00</p>
+    </div>
+    <div id="questionCounter">Soru: 1 / 12</div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
