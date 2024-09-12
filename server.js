@@ -15,7 +15,7 @@ const db = mysql.createConnection({
     user: 'sql7730890',
     password: '8D3wwHwmjv', // Kendi MySQL şifrenizi buraya girin
     database: 'sql7730890',
-    port: '3306'
+    port: 3306
 });
 
 db.connect((err) => {
@@ -132,7 +132,7 @@ app.get('/get-scores', (req, res) => {
 
 
 // Sunucu portu
-const PORT = 3306;
+const PORT =process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Sunucu ${PORT} portunda çalışıyor`);
 });
