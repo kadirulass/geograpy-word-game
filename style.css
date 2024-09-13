@@ -45,6 +45,7 @@ h1, h2 {
 }
 .game-container{
     border-radius: 10px;
+    position: relative;
     max-width: 1000px;
     background-color: #000000a4;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -81,15 +82,14 @@ input, select {
     border-radius: 5px;
 }
 #questionCounter {
-    position: absolute;
-    bottom: 20px; /* Sayfanın altına 10px uzaklık */
-    left: 50%; /* Yatay ortalama */
-    transform: translateX(-50%); /* Kendi genişliğinin yarısı kadar sola kaydırma */
-    font-size: 18px;
-    color: #333;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8); /* Hafif beyaz arka plan */
-    border-radius: 5px; /* Köşeleri yuvarlatma */
+    position: absolute; /* game-container içinde sabitlemek için absolute kullanıyoruz */
+    top: 10px; /* Üstten 10px boşluk */
+    right: 10px; /* Sağdan 10px boşluk */
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.7); /* Hafif şeffaf siyah arka plan */
+    color: rgb(255, 0, 0); /* Yazı rengi */
+    padding: 5px 10px; /* İçerik ile kenar boşluğu */
+    border-radius: 5px; /* Hafif yuvarlak köşeler */
 }
 
 button {
