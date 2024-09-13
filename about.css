@@ -1,0 +1,91 @@
+/* Genel Stil */
+body {
+    background-image: url(images/pxfuel.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Container ve İçerik Stil */
+.info-container {
+    background: linear-gradient(135deg, #000000a1, #000000c0);
+    color: white;
+    padding: 20px;
+    margin: 50px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* H1 ve P Stil */
+h1 {
+    text-align: center;
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Button Stil */
+button {
+    display: block;
+    width: 100px;
+    padding: 10px;
+    margin: 20px auto;
+    font-size: 1em;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e64a19;
+}
+
+/* Media Query - Mobil Uyumlu Tasarım */
+@media (max-width: 768px) {
+    .info-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    button {
+        width: 90px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-container {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    button {
+        width: 80px;
+        font-size: 0.8em;
+    }
+}
