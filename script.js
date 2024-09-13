@@ -122,6 +122,8 @@ function kelimeHarfAl() {
     harfler.push(harf);
     kelimeGorunumu[acilacakIndex] = harf; // Rastgele kutucukta harf aç
     kalanHarfSayisi--; // Kalan harf sayısını bir azalt
+    if(kalanHarfSayisi==0)
+        gosterKelime();
     gosterKelime(""); // Harf eklendikten sonra kelimeyi tekrar göster
 }
 
