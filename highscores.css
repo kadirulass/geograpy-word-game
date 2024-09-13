@@ -1,7 +1,7 @@
 /* Genel stil ayarları */
 body {
     font-family: Arial, sans-serif;
-    background-image: url(images/arkaplan1.jpg);
+    background-color: #000000;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -27,6 +27,12 @@ body {
     max-width: 400px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
+    margin: 20px 0;
+        /* Sabit yükseklik ve kaydırma */
+     height: 800px;  /* Sabit yükseklik */
+     max-height: 800px;  /* Yüksekliği aşarsa kaydırma eklenecek */
+     overflow-y: hidden;  /* Dikey kaydırma çubuğu eklenir */
+    
 }
 
 /* Başlık stili */
@@ -46,25 +52,26 @@ h1 {
 
 /* Liste öğesi stili */
 #scoreList li {
-    background-image: url(images/red.png);
+    background-color: #f70202;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     text-align: center;
     padding: 15px;
     color: #ffffff;
-    max-height: 40px;
+    height: 10px;
     margin-bottom: 15px;
     display: flex;
     justify-content: center;
+    border-radius: 100%;
     align-items: center;
     border-radius: 5px;
     transition: transform 0.3s;
 }
 
 #scoreList li:hover {
-    transform: scale(1.05);
-    background-image: url(images/red_hover.png); /* Hover durumda farklı arka plan */
+    transform: scale(1.10);
+    background-color: rgb(41, 82, 0);
 }
 
 /* Liste öğesi başlığı stili */

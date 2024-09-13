@@ -5,9 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const scoreList = document.getElementById('scoreList');
             scoreList.innerHTML = ''; // Önceki verileri temizle
 
-            data.forEach(score => {
+            data.forEach((score, index) => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${score.kullanici_adi} - ${score.puan} puan`;
+                // Sıralama numarasını eklemek için index + 1 kullanıyoruz
+                listItem.textContent = `${index + 1}. ${score.kullanici_adi} - ${score.puan} puan`;
+
+                if (index === 0) {
+                    listItem.style.backgroundColor = 'yellow';  // Arka planı sarı yap
+                    listItem.style.color = 'black';  // Yazı rengini siyah yap
+                }
                 scoreList.appendChild(listItem);
             });
         })
