@@ -122,9 +122,14 @@ function kelimeHarfAl() {
     harfler.push(harf);
     kelimeGorunumu[acilacakIndex] = harf; // Rastgele kutucukta harf aç
     kalanHarfSayisi--; // Kalan harf sayısını bir azalt
-    if(kalanHarfSayisi==0)
+    if (kalanHarfSayisi === 0) {
         gosterKelime();
-    gosterKelime(""); // Harf eklendikten sonra kelimeyi tekrar göster
+        setTimeout(() => {
+            kelimeSec(); // Diğer soruya geç
+        }, 2000); // 2 saniye bekle
+    } else {
+        gosterKelime(""); // Harf eklendikten sonra kelimeyi tekrar göster
+    }// Harf eklendikten sonra kelimeyi tekrar göster
 }
 
 function kelimeBulundu() {
