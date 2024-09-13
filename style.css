@@ -183,17 +183,20 @@ button:hover {
 }
 
 
+/* Genel stil ayarları */
 .hex-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap; /* Alt satıra geçmesini engeller */
+    overflow-x: auto; /* Genişse yatay kaydırma çubuğu ekler */
     gap: 10px; /* Kutular arasındaki boşluk */
-    margin-top: 20px;
+    padding: 10px;
 }
 
+/* Hex kutucuk stili */
 .hex {
-    width: 60px;
-    height: 60px;
+    flex: 1 1 auto; /* Genişliği otomatik ayarlar, yer olduğunda büyür */
+    min-width: 40px; /* Küçük alanlarda minimum genişlik */
+    height: 60px; /* Yükseklik */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,6 +208,16 @@ button:hover {
     text-transform: uppercase;
     transition: background-color 0.3s;
 }
+
+/* Küçültme için medya sorguları */
+@media (max-width: 600px) {
+    .hex {
+        min-width: 30px; /* Daha küçük alanlarda daha küçük genişlik */
+        height: 45px; /* Küçültülmüş yükseklik */
+        font-size: 18px; /* Küçültülmüş font boyutu */
+    }
+}
+
 
 .hex.invisible {
     background-color: #058feb; /* Gizli harfler için farklı bir renk */
