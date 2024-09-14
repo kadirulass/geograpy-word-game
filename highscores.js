@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('https://cografya-kelime-oyunu.onrender.com/get-scores')
         .then(response => response.json())
         .then(data => {
-            const scoreList = document.querySelector('#scoreList tbody');
+            const scoreList = document.querySelector('#scoreTable tbody');
             scoreList.innerHTML = ''; // Önceki verileri temizle
 
             // Veriyi kontrol et
