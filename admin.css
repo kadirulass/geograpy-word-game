@@ -32,7 +32,7 @@ body {
 
 /* Başlık stili */
 h1 {
-    color: #880000;
+    color: #ffffff;
     margin-bottom: 20px;
     font-size: 2em;
 }
@@ -56,7 +56,7 @@ select, input {
     border-radius: 5px;
     border: 1px solid #ffffff;
     background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    color: #000000;
     font-size: 1em;
 }
 
