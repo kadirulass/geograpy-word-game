@@ -172,15 +172,7 @@ function oyunBitti() {
      // Oyun süresini hesapla (milisaniye cinsinden)
      let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
  
-     // Milisaniyeyi saniye olarak dönüştür
-     let oyunSuresiSaniye = Math.floor(oyunSuresiMs / 1000);
- 
-     // Süreyi "hh:mm:ss" formatına dönüştür
-     let saat = Math.floor(oyunSuresiSaniye / 3600);
-     let dakika = Math.floor((oyunSuresiSaniye % 3600) / 60);
-     let saniye = oyunSuresiSaniye % 60;
- 
-     let formatliSure = `${String(saat).padStart(2, '0')}:${String(dakika).padStart(2, '0')}:${String(saniye).padStart(2, '0')}`;
+     const sureStr = milisaniyeyiFormataCevir(gecenSure);
     const kullaniciAdi = prompt('Oyun bitti! Kullanıcı adınızı girin:');
     if (kullaniciAdi) {
         fetch('https://cografya-kelime-oyunu.onrender.com/add-score', {
@@ -257,4 +249,12 @@ function sureyiBaslat() {
             oyunBitti();
         }
     }, 1000);
+}
+
+function milisaniyeyiFormataCevir(ms) {
+    const saniye = Math.floor(ms / 1000);
+    const saat = Math.floor(saniye / 3600).toString().padStart(2, '0');
+    const dakika = Math.floor((saniye % 3600) / 60).toString().padStart(2, '0');
+    const saniyeKalan = (saniye % 60).toString().padStart(2, '0');
+    return `${saat}:${dakika}:${saniyeKalan}`;
 }

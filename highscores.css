@@ -24,15 +24,13 @@ body {
     padding: 20px;
     border-radius: 10px;
     width: 100%;
-    max-width: 400px;
+    max-width: 600px; /* Daha geniş bir container ayarlayalım */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     margin: 20px 0;
-        /* Sabit yükseklik ve kaydırma */
-     height: 800px;  /* Sabit yükseklik */
-     max-height: 800px;  /* Yüksekliği aşarsa kaydırma eklenecek */
-     overflow-y: hidden;  /* Dikey kaydırma çubuğu eklenir */
-    
+    height: 800px;  /* Sabit yükseklik */
+    max-height: 800px;  /* Yüksekliği aşarsa kaydırma eklenecek */
+    overflow-y: hidden;  /* Dikey kaydırma çubuğu eklenir */
 }
 
 /* Başlık stili */
@@ -42,49 +40,42 @@ h1 {
     font-size: 2em;
 }
 
-/* Liste stili */
-#scoreList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+/* Tablo stili */
+table {
     width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Arka planın okunabilir olması için */
 }
 
-/* Liste öğesi stili */
-#scoreList li {
-    background-color: #f70202;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+th, td {
+    padding: 10px;
+    border: 1px solid #fff;
     text-align: center;
-    padding: 15px;
     color: #ffffff;
-    height: 10px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
-    border-radius: 100%;
-    align-items: center;
-    border-radius: 5px;
-    transition: transform 0.3s;
 }
 
-#scoreList li:hover {
-    transform: scale(1.10);
-    background-color: rgb(41, 82, 0);
-}
-
-/* Liste öğesi başlığı stili */
-#scoreList li span {
+/* Tablo başlık stili */
+th {
+    background-color: #ff0000;
+    font-size: 1.2em;
     font-weight: bold;
-    color: #000000;
-    flex: 1;
+    color: #ffffff;
 }
 
-/* Liste öğesi puan stili */
-#scoreList li span.score {
-    color: #000000;
-    margin-left: auto; /* Puanları sağa hizalar */
+/* Tablo satır stili */
+td {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+
+/* Alternatif satır renkleri */
+tr:nth-child(odd) {
+    background-color: rgba(255, 0, 0, 0.6);
+}
+
+tr:hover {
+    background-color: rgb(41, 82, 0);
+    color: #fff;
 }
 
 /* Buton stili */
@@ -93,12 +84,12 @@ button {
     color: #ffffff;
     border: none;
     border-radius: 5px;
-    padding: 8px 16px;  /* Buton boyutu küçültüldü */
-    font-size: 14px;    /* Font boyutu küçültüldü */
+    padding: 8px 16px;
+    font-size: 14px;
     cursor: pointer;
     margin-top: 20px;
     width: 100%;
-    max-width: 120px;   /* Buton genişliği küçültüldü */
+    max-width: 120px;
     transition: background-color 0.3s ease;
 }
 
@@ -112,9 +103,9 @@ button:hover {
         font-size: 1.5em;
     }
 
-    #scoreList li {
-        max-height: 30px;
-        padding: 10px;
+    th, td {
+        padding: 8px;
+        font-size: 0.9em;
     }
 
     button {
@@ -133,9 +124,9 @@ button:hover {
         font-size: 1.2em;
     }
 
-    #scoreList li {
-        max-height: 25px;
-        padding: 8px;
+    th, td {
+        padding: 6px;
+        font-size: 0.8em;
     }
 
     button {
