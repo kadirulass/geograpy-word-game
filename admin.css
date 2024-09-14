@@ -1,0 +1,121 @@
+/* Genel stil ayarları */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Admin container stili */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6); /* Arka planın daha okunabilir olması için */
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Başlık stili */
+h1 {
+    color: #880000;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* Form stili */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    margin: 0;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+select, input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 1em;
+}
+
+button {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    select, input {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+
+    form {
+        gap: 8px;
+    }
+
+    select, input {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+}
