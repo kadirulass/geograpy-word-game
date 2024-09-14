@@ -10,6 +10,8 @@ let sorulmusKelimeler = [];
 let soruSayisi = 0;
 const toplamSoruSayisi = 12;
 let kalanHarfSayisi = 0; // Kalan harf sayısını takip edeceğiz
+let oyunBaslangicZamani; // Oyun başlangıç zamanı
+let oyunBitisZamani; // Oyun bitiş zamanı
 
 let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 
@@ -27,6 +29,9 @@ fetch('https://cografya-kelime-oyunu.onrender.com/get-questions')
         kelimeSec();
         sureyiBaslat();
         sureyiGuncelle();
+
+        // Oyun başlama zamanını kaydet
+        oyunBaslangicZamani = new Date(); // Şu anki tarih ve saati alır
     })
     .catch(error => {
         console.error('Kelimeler verisi yüklenirken hata oluştu:', error);
@@ -161,6 +166,21 @@ function kelimeBulundu() {
 
 function oyunBitti() {
     clearInterval(sureInterval);
+     // Oyun bitiş zamanını kaydet
+     oyunBitisZamani = new Date(); // Şu anki tarih ve saati alır
+
+     // Oyun süresini hesapla (milisaniye cinsinden)
+     let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
+ 
+     // Milisaniyeyi saniye olarak dönüştür
+     let oyunSuresiSaniye = Math.floor(oyunSuresiMs / 1000);
+ 
+     // Süreyi "hh:mm:ss" formatına dönüştür
+     let saat = Math.floor(oyunSuresiSaniye / 3600);
+     let dakika = Math.floor((oyunSuresiSaniye % 3600) / 60);
+     let saniye = oyunSuresiSaniye % 60;
+ 
+     let formatliSure = `${String(saat).padStart(2, '0')}:${String(dakika).padStart(2, '0')}:${String(saniye).padStart(2, '0')}`;
     const kullaniciAdi = prompt('Oyun bitti! Kullanıcı adınızı girin:');
     if (kullaniciAdi) {
         fetch('https://cografya-kelime-oyunu.onrender.com/add-score', {
@@ -168,7 +188,7 @@ function oyunBitti() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ kullanici_adi: kullaniciAdi, puan: toplamPuan })
+            body: JSON.stringify({ kullanici_adi: kullaniciAdi, puan: toplamPuan, sure: formatliSure })
         })
         .then(response => response.text())
         .then(data => {
