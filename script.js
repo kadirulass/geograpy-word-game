@@ -174,12 +174,12 @@ function oyunBitti() {
         .then(data => {
             console.log(data);
             alert("Skor başarıyla kaydedildi!");
-            window.location.href = 'start.html'; // Hata durumunda da yönlendirme yap
+            window.location.href = 'index.html'; // Hata durumunda da yönlendirme yap
         })
         .catch(error => console.error('Hata:', error));
     }
     else{
-        window.location.href = 'start.html'; // Hata durumunda da yönlendirme yap
+        window.location.href = 'index.html'; // Hata durumunda da yönlendirme yap
     }
 }
 
