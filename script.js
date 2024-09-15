@@ -260,20 +260,29 @@ function sureyiGuncelle() {
     document.getElementById("timeDisplay").textContent = `Kalan Süre: ${minutes}:${seconds}`;
 }
 
+// Süreyi Durdur
 function sureyiDurdur() {
-    clearInterval(sureInterval);
-    sonDurduguZaman = new Date(); // Süre durdurulma zamanını kaydet
+    if (sureInterval) {
+        clearInterval(sureInterval); // Mevcut intervali temizle
+        sureInterval = null; // Intervali sıfırla
+        sonDurduguZaman = new Date(); // Süre durdurulma zamanını kaydet
+    }
 }
 
+// Süreyi Kaldığı Yerden Devam Ettir
 function sureyiDevamEttir() {
     if (sonDurduguZaman) {
         const durmaSuresi = (new Date() - sonDurduguZaman) / 1000; // Durma süresi saniye cinsinden hesaplanır
         sure = Math.max(sure - Math.floor(durmaSuresi), 0); // Süreyi kalan süreye göre güncelle
-        sureyiGuncelle();
+        sonDurduguZaman = null; // Durdurulan zamanı sıfırla
     }
-    sureyiBaslat(); // Süreyi tekrar başlat
-    sonDurduguZaman = null; // Durdurulan zamanı sıfırla
+
+    // Eğer süreyi devam ettirmek için bir interval zaten yoksa başlat
+    if (!sureInterval) {
+        sureyiBaslat(); // Süreyi tekrar başlat
+    }
 }
+
 
 
 function milisaniyeyiFormataCevir(ms) {
