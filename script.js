@@ -69,11 +69,11 @@ function kelimeSec() {
     do {
         secilen = kelimeListesi[Math.floor(Math.random() * kelimeListesi.length)];
         denemeSayisi++;
-        if (denemeSayisi > kelimeListesi.length) {
+        /*if (denemeSayisi > kelimeListesi.length) {
             alert("Tüm kelimeler soruldu, başka kelime kalmadı!");
             oyunBitti();
             return;
-        }
+        }*/
     } while (sorulmusKelimeler.includes(secilen.kelime));
 
     // Seçilen kelimeyi sorulmuş kelimeler listesine ekliyoruz
