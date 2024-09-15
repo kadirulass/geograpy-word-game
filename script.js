@@ -237,10 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function sureyiBaslat() {
-    sure = 240;
-    clearInterval(sureInterval);
-    sureyiGuncelle();
-    oyunBaslangicZamani = new Date(); // Oyun başlama zamanı
+    if (sureInterval) {
+        clearInterval(sureInterval); // Daha önce başlatılan interval varsa temizle
+    }
+
     sureInterval = setInterval(() => {
         if (sure > 0) {
             sure--;
@@ -253,6 +253,7 @@ function sureyiBaslat() {
     }, 1000);
 }
 
+
 function sureyiGuncelle() {
     const minutes = String(Math.floor(sure / 60)).padStart(2, '0');
     const seconds = String(sure % 60).padStart(2, '0');
@@ -261,19 +262,19 @@ function sureyiGuncelle() {
 
 function sureyiDurdur() {
     clearInterval(sureInterval);
-    sonDurduguZaman = new Date();
+    sonDurduguZaman = new Date(); // Süre durdurulma zamanını kaydet
 }
+
 function sureyiDevamEttir() {
     if (sonDurduguZaman) {
-        const durmaSuresi = (new Date() - sonDurduguZaman) / 1000; // Durma süresi saniye cinsinden
-        sure = Math.max(sure - Math.floor(durmaSuresi), 0); // Süreyi güncelle ve negatif olmasına engel ol
+        const durmaSuresi = (new Date() - sonDurduguZaman) / 1000; // Durma süresi saniye cinsinden hesaplanır
+        sure = Math.max(sure - Math.floor(durmaSuresi), 0); // Süreyi kalan süreye göre güncelle
         sureyiGuncelle();
-        sureyiBaslat(); // Süreyi tekrar başlat
-    } else {
-        sureyiBaslat(); // Eğer süre durdurulmamışsa direkt başlat
     }
-    sonDurduguZaman = null; // Durma zamanını sıfırla
+    sureyiBaslat(); // Süreyi tekrar başlat
+    sonDurduguZaman = null; // Durdurulan zamanı sıfırla
 }
+
 
 function milisaniyeyiFormataCevir(ms) {
     const saniye = Math.floor(ms / 1000);
