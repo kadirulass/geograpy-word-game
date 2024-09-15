@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (oyunBitti) return;
         const tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
         document.getElementById("guessSection").style.display = "none";
+        document.getElementById("guessInput").value="";
 
         if (tahmin === gizliKelime.toLowerCase()) {
             kelimeBulundu();
