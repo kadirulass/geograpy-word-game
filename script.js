@@ -221,8 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("guessSection").style.display = "none";
 
           // Tahmin yapıldıktan sonra süreyi yeniden başlatıyoruz
-        clearInterval(sureInterval); // Süreyi durdur
-        sureyiGuncelle(); // Kalan süreyi güncelle
         sureyiBaslat(); // Süreyi yeniden başlat
 
 
@@ -256,6 +254,9 @@ function sureyiGuncelle() {
         alert('Süre doldu! Oyun bitti.');
         oyunBitti();
     }
+}
+function sureyiDurdur() {
+    clearInterval(sureInterval);
 }
 
 function milisaniyeyiFormataCevir(ms) {
