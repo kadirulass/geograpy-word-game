@@ -14,11 +14,17 @@ let oyunBaslangicZamani;
 let oyunBitisZamani; // Oyun başlangıç zamanı
 let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 let sureDurmaZamani; // Sürenin durduğu zamanı saklamak için
-let sureDevamEttirildi; // Sürenin devam ettirilip ettirilmediğini kontrol etmek için
+let sureDevamEttirildi;
+let saniyeSayaci = 0; // Sayaç için saniye cinsinden değişken
+let saniyeInterval; // Sürenin devam ettirilip ettirilmediğini kontrol etmek için
 
 function oyunBaslat() {
     oyunBaslangicZamani = new Date(); // Oyun başlangıç zamanını kaydet
     sureyiBaslat(); // Zamanlayıcı başlatılır
+    saniyeSayaci = 0; // Sayaç sıfırlanır
+    saniyeInterval = setInterval(() => {
+        saniyeSayaci++; // Her saniye sayaç 1 artar
+    }, 1000);
 }
 
 // Veritabanından kelimeleri yükle
@@ -168,10 +174,7 @@ function kelimeBulundu() {
 function oyunBitti() {
     clearInterval(sureInterval);
 
-    oyunBitisZamani = new Date(); // Şu anki tarih ve saati alır
-    let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
-
-    const formatliSure = milisaniyeyiFormataCevir(oyunSuresiMs);
+    const formatliSure = milisaniyeyiFormataCevir(saniyeSayaci * 1000); // Saniyeleri milisaniyeye çevirir ve formatlar
 
     const kullaniciAdi = prompt('Oyun bitti! Kullanıcı adınızı girin:');
     if (kullaniciAdi) {
