@@ -49,13 +49,13 @@ h1 {
 
 #scoreTable th, #scoreTable td {
     padding: 10px;
-    border: 1px solid #ffffff;
+    border: 1px solid #000000;
     text-align: center;
 }
 
 #scoreTable tr {
     background-color: #f70202; /* Varsayılan arka plan rengi */
-    color: #ffffff;
+    color: #000000;
 }
 
 #scoreTable .first-place {

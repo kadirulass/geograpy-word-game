@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     row.innerHTML = `
                         <td>${index + 1}</td>
                         <td>${score.kullanici_adi}</td>
-                        <td>${score.puan} puan</td>
+                        <td>${score.puan}</td>
                     `;
 
                     scoreList.appendChild(row);
