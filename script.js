@@ -19,6 +19,10 @@ let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 fetch('https://cografya-kelime-oyunu.onrender.com/get-questions')
     .then(response => response.json())
     .then(data => {
+        // Gelen veriyi kontrol etmek için log ekliyoruz
+        console.log("Kelimeler verisi: ", data);
+
+        // Kelimeleri kategoriye göre ayırıyoruz
         kelimeler = data.reduce((acc, item) => {
             const { kelime, soru, kategori } = item;
             if (!acc[kategori]) acc[kategori] = [];
@@ -26,32 +30,36 @@ fetch('https://cografya-kelime-oyunu.onrender.com/get-questions')
             return acc;
         }, {});
 
-        kelimeSec();
-        sureyiBaslat();
+        kelimeSec(); // Oyun başladığında ilk kelime seçimi yapılır
+        sureyiBaslat(); // Zamanlayıcı başlatılır
         sureyiGuncelle();
 
-        // Oyun başlama zamanını kaydet
-        oyunBaslangicZamani = new Date(); // Şu anki tarih ve saati alır
+        // Oyun başlama zamanını kaydediyoruz
+        oyunBaslangicZamani = new Date();
     })
     .catch(error => {
         console.error('Kelimeler verisi yüklenirken hata oluştu:', error);
     });
 
 function kelimeSec() {
+    console.log("Kelime seçiliyor...");
+
     if (kelimeSayisi >= 2) {
         kelimeUzunlugu++;
         kelimeSayisi = 0;
     }
 
+    // Eğer kelime uzunluğu maksimum sınırı geçtiyse oyun biter
     if (kelimeUzunlugu > 10) {
         alert(`Oyun Bitti! Toplam Puanınız: ${toplamPuan}`);
         oyunBitti();
         return;
     }
 
+    // Seçilecek kelimeler kategorisini kontrol ediyoruz
     const kelimeListesi = kelimeler[kelimeUzunlugu];
     if (!kelimeListesi || kelimeListesi.length === 0) {
-        alert("Bu uzunlukta kelime bulunamadı!");
+        alert(`Bu uzunlukta (${kelimeUzunlugu}) kelime bulunamadı!`);
         return;
     }
 
@@ -60,14 +68,14 @@ function kelimeSec() {
     do {
         secilen = kelimeListesi[Math.floor(Math.random() * kelimeListesi.length)];
         denemeSayisi++;
-        //if (denemeSayisi > kelimeListesi.length) {
-          //  alert("Tüm kelimeler soruldu, başka kelime kalmadı!");
+        if (denemeSayisi > kelimeListesi.length) {
+            alert("Tüm kelimeler soruldu, başka kelime kalmadı!");
             oyunBitti();
-            //return;
-        //}
+            return;
+        }
     } while (sorulmusKelimeler.includes(secilen.kelime));
 
-    // Seçilen kelimeyi sorulmuş kelimeler listesine ekle
+    // Seçilen kelimeyi sorulmuş kelimeler listesine ekliyoruz
     sorulmusKelimeler.push(secilen.kelime);
     gizliKelime = secilen.kelime;
     kelimeGorunumu = Array(gizliKelime.length).fill('_');
@@ -96,7 +104,7 @@ function gosterKelime(soru) {
             const hex = document.createElement("div");
             hex.classList.add("hex", harf === '_' ? 'invisible' : '');
             hex.textContent = harf;
-            hex.dataset.index = i; // Her kutucuğa indeks ekleyelim
+            hex.dataset.index = i; // Her kutucuğa indeks ekliyoruz
             hexContainer.appendChild(hex);
         });
 
@@ -117,7 +125,6 @@ function guncelleSoruSayisi() {
 }
 
 function kelimeHarfAl() {
-    let mevcutHarfler = kelimeGorunumu.join('');
     let harf = '';
     let acilacakIndex = -1;
     do {
@@ -128,6 +135,7 @@ function kelimeHarfAl() {
     harfler.push(harf);
     kelimeGorunumu[acilacakIndex] = harf; // Rastgele kutucukta harf aç
     kalanHarfSayisi--; // Kalan harf sayısını bir azalt
+
     if (kalanHarfSayisi === 0) {
         gosterKelime();
         setTimeout(() => {
@@ -135,11 +143,10 @@ function kelimeHarfAl() {
         }, 2000); // 2 saniye bekle
     } else {
         gosterKelime(""); // Harf eklendikten sonra kelimeyi tekrar göster
-    }// Harf eklendikten sonra kelimeyi tekrar göster
+    }
 }
 
 function kelimeBulundu() {
-    // Kalan harf sayısına göre puan hesapla
     let yeniPuan = kalanHarfSayisi * 100;
     toplamPuan += yeniPuan;
     document.getElementById("scoreDisplay").textContent = `${toplamPuan}`;
@@ -147,17 +154,14 @@ function kelimeBulundu() {
     const dogruTahminSes = new Audio('sound/true.mp3');
     dogruTahminSes.play();
 
-    // Kelimenin tamamını göster
     kelimeGorunumu = gizliKelime.split('');
     gosterKelime(""); // Harfleri güncelle
 
     if (soruSayisi >= toplamSoruSayisi) {
-        // Oyun bitti ise
         setTimeout(() => {
             oyunBitti();
         }, 2000); // 2 saniye bekle
     } else {
-        // Bir sonraki kelimeye geçiş
         setTimeout(() => {
             kelimeSec();
         }, 2000); // 2 saniye bekle
@@ -167,13 +171,9 @@ function kelimeBulundu() {
 function oyunBitti() {
     clearInterval(sureInterval);
 
-    // Oyun bitiş zamanını kaydet
     oyunBitisZamani = new Date(); // Şu anki tarih ve saati alır
-
-    // Oyun süresini hesapla (milisaniye cinsinden)
     let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
 
-    // Milisaniyeyi formatlayarak okunabilir bir süreye dönüştür
     const formatliSure = milisaniyeyiFormataCevir(oyunSuresiMs);
 
     const kullaniciAdi = prompt('Oyun bitti! Kullanıcı adınızı girin:');
@@ -189,23 +189,20 @@ function oyunBitti() {
         .then(data => {
             console.log(data);
             alert("Skor başarıyla kaydedildi!");
-            window.location.href = 'index.html'; // Hata durumunda da yönlendirme yap
+            window.location.href = 'index.html';
         })
         .catch(error => console.error('Hata:', error));
     }
     else {
-        window.location.href = 'index.html'; // Hata durumunda da yönlendirme yap
+        window.location.href = 'index.html';
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Oyun bitiş durumu
     let oyunBitti = false;
 
-    // Butonlara tıklama olaylarını ekle
     document.getElementById("buyLetterBtn").addEventListener("click", () => {
-        const harfSatinAlSes=new Audio('sound/tingting.mp3');
+        const harfSatinAlSes = new Audio('sound/tingting.mp3');
         harfSatinAlSes.play();
         if (oyunBitti) return;
         kelimeHarfAl();
@@ -222,43 +219,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (oyunBitti) return;
         let tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
         document.getElementById("guessSection").style.display = "none";
-        sureyiBaslat(); // Süreyi tekrar başlat
-        if (tahmin === gizliKelime.toLowerCase().trim()) {
+        if (tahmin === gizliKelime.toLowerCase()) {
             kelimeBulundu();
-            document.getElementById("guessInput").value="";
         } else {
-            const hataliSes=new Audio('sound/wrong.mp3');
-            hataliSes.play();
-            //alert(`Yanlış tahmin!`);
-            
-            document.getElementById("guessInput").value="";
+            alert("Yanlış tahmin!");
+            sureyiBaslat(); // Süreyi yeniden başlat
         }
+        document.getElementById("guessInput").value = ""; // Tahmin kutusunu temizle
     });
 });
 
-function sureyiGuncelle() {
-    const minutes = String(Math.floor(sure / 60)).padStart(2, '0');
-    const seconds = String(sure % 60).padStart(2, '0');
-    document.getElementById("timeDisplay").textContent = `Kalan Süre: ${minutes}:${seconds}`;
+function sureyiBaslat() {
+    sure = 240;
+    clearInterval(sureInterval);
+    sureInterval = setInterval(sureyiGuncelle, 1000);
 }
 
-function sureyiBaslat() {
-    sureInterval = setInterval(() => {
-        if (sure > 0) {
-            sure--;
-            sureyiGuncelle();
-        } else {
-            clearInterval(sureInterval);
-            alert("Süre doldu! Oyun bitti.");
-            oyunBitti();
-        }
-    }, 1000);
+function sureyiGuncelle() {
+    const minutes = Math.floor(sure / 60);
+    const seconds = sure % 60;
+    document.getElementById("timer").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    sure--;
+
+    if (sure < 0) {
+        clearInterval(sureInterval);
+        alert('Süre doldu! Oyun bitti.');
+        oyunBitti();
+    }
 }
 
 function milisaniyeyiFormataCevir(ms) {
-    const saniye = Math.floor(ms / 1000);
-    const saat = Math.floor(saniye / 3600).toString().padStart(2, '0');
-    const dakika = Math.floor((saniye % 3600) / 60).toString().padStart(2, '0');
-    const saniyeKalan = (saniye % 60).toString().padStart(2, '0');
-    return `${saat}:${dakika}:${saniyeKalan}`;
+    const minutes = Math.floor(ms / 60000);
+    const seconds = ((ms % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
