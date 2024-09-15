@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById("guessWordBtn").addEventListener("click", () => {
         if (oyunBitti) return;
-        clearInterval(sureInterval); // Süreyi durdur
+        sureyiDurdur(); // Süreyi durdur
         document.getElementById("guessSection").style.display = "block";
         document.getElementById("guessInput").focus();
     });
@@ -240,7 +240,17 @@ function sureyiBaslat() {
     sure = 240;
     clearInterval(sureInterval);
     sureyiGuncelle();
-    sureInterval = setInterval(sureyiGuncelle, 1000);
+    oyunBaslangicZamani = new Date(); // Oyun başlama zamanı
+    sureInterval = setInterval(() => {
+        if (sure > 0) {
+            sure--;
+            sureyiGuncelle();
+        } else {
+            clearInterval(sureInterval);
+            alert("Süre doldu! Oyun bitti.");
+            oyunBitti();
+        }
+    }, 1000);
 }
 
 function sureyiGuncelle() {
@@ -255,14 +265,12 @@ function sureyiDurdur() {
 }
 function sureyiDevamEttir() {
     if (sonDurduguZaman) {
-        // Durma süresini hesapla
-        const durmaSuresi = new Date() - sonDurduguZaman;
-        sure -= Math.floor(durmaSuresi / 1000); // Durma süresini saniye cinsinden hesapla
-        if (sure < 0) sure = 0; // Süreyi negatif olmasına engel ol
+        const durmaSuresi = (new Date() - sonDurduguZaman) / 1000; // Durma süresi saniye cinsinden
+        sure = Math.max(sure - Math.floor(durmaSuresi), 0); // Süreyi güncelle ve negatif olmasına engel ol
         sureyiGuncelle();
         sureyiBaslat(); // Süreyi tekrar başlat
     } else {
-        sureyiBaslat(); // İlk defa başlatıyorsak sadece başlat
+        sureyiBaslat(); // Eğer süre durdurulmamışsa direkt başlat
     }
     sonDurduguZaman = null; // Durma zamanını sıfırla
 }
