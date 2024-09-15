@@ -4,16 +4,16 @@ let kelimeSayisi = 0;
 let gizliKelime = "";
 let kelimeGorunumu = [];
 let harfler = [];
-let sure = 240;
-let sonDurduguZaman; // 4 dakika
+let sure = 240; // 4 dakika
 let sureInterval;
 let sorulmusKelimeler = [];
 let soruSayisi = 0;
 const toplamSoruSayisi = 12;
 let kalanHarfSayisi = 0; // Kalan harf sayısını takip edeceğiz
-let oyunBaslangicZamani; 
-let oyunBitisZamani;// Oyun başlangıç zamanı
+let oyunBaslangicZamani;
+let oyunBitisZamani; // Oyun başlangıç zamanı
 let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
+let sureDurmaZamani; // Sürenin durduğu zamanı saklamak için
 
 function oyunBaslat() {
     oyunBaslangicZamani = new Date(); // Oyun başlangıç zamanını kaydet
@@ -69,11 +69,6 @@ function kelimeSec() {
     do {
         secilen = kelimeListesi[Math.floor(Math.random() * kelimeListesi.length)];
         denemeSayisi++;
-        /*if (denemeSayisi > kelimeListesi.length) {
-            alert("Tüm kelimeler soruldu, başka kelime kalmadı!");
-            oyunBitti();
-            return;
-        }*/
     } while (sorulmusKelimeler.includes(secilen.kelime));
 
     // Seçilen kelimeyi sorulmuş kelimeler listesine ekliyoruz
@@ -155,7 +150,7 @@ function kelimeBulundu() {
     const dogruTahminSes = new Audio('sound/true.mp3');
     dogruTahminSes.play();
 
-    kelimeGorunumu = gizliKelime.split('');
+    kelimeGorunumu = gizliKelime.split(''); // Harfleri güncelle
     gosterKelime(""); // Harfleri güncelle
 
     if (soruSayisi >= toplamSoruSayisi) {
@@ -193,8 +188,7 @@ function oyunBitti() {
             window.location.href = 'index.html';
         })
         .catch(error => console.error('Hata:', error));
-    }
-    else {
+    } else {
         window.location.href = 'index.html';
     }
 }
@@ -221,9 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
         document.getElementById("guessSection").style.display = "none";
 
-         sureyiDevamEttir();
-
-
         if (tahmin === gizliKelime.toLowerCase()) {
             kelimeBulundu();
             document.getElementById("guessInput").value = "";
@@ -232,7 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
             hataliSes.play();
             document.getElementById("guessInput").value = "";
         }
-        document.getElementById("guessInput").value = ""; // Tahmin kutusunu temizle
+
+        // Tahmin gönderildikten sonra süreyi devam ettir
+        sureyiDevamEttir();
     });
 });
 
@@ -253,30 +246,27 @@ function sureyiBaslat() {
     }, 1000);
 }
 
-
 function sureyiGuncelle() {
     const minutes = String(Math.floor(sure / 60)).padStart(2, '0');
     const seconds = String(sure % 60).padStart(2, '0');
     document.getElementById("timeDisplay").textContent = `Kalan Süre: ${minutes}:${seconds}`;
 }
 
-let durmaZamani = 0; // Durdurulan süreyi saklamak için ek bir değişken
-
 // Süreyi Durdur
 function sureyiDurdur() {
     if (sureInterval) {
         clearInterval(sureInterval); // Mevcut intervali temizle
         sureInterval = null; // Intervali sıfırla
-        durmaZamani = new Date(); // Süre durdurulma zamanını kaydet
+        sureDurmaZamani = new Date(); // Süre durdurulma zamanını kaydet
     }
 }
 
 // Süreyi Kaldığı Yerden Devam Ettir
 function sureyiDevamEttir() {
-    if (durmaZamani) {
-        const gecenSure = (new Date() - durmaZamani) / 1000; // Durma süresi saniye cinsinden hesaplanır
-        sure = Math.max(sure - Math.floor(gecenSure), 0); // Süreyi kalan süreye göre güncelle
-        durmaZamani = null; // Durdurulan zamanı sıfırla
+    if (sureDurmaZamani) {
+        const durmaSuresi = (new Date() - sureDurmaZamani) / 1000; // Durma süresi saniye cinsinden hesaplanır
+        sure = Math.max(sure - Math.floor(durmaSuresi), 0); // Süreyi kalan süreye göre güncelle
+        sureDurmaZamani = null; // Durdurulan zamanı sıfırla
     }
 
     // Eğer süreyi devam ettirmek için bir interval zaten yoksa başlat
@@ -284,9 +274,6 @@ function sureyiDevamEttir() {
         sureyiBaslat(); // Süreyi tekrar başlat
     }
 }
-
-
-
 
 function milisaniyeyiFormataCevir(ms) {
     const saniye = Math.floor(ms / 1000);
