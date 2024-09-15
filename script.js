@@ -219,7 +219,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (oyunBitti) return;
         let tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
         document.getElementById("guessSection").style.display = "none";
-        sureyiBaslat(); // Süreyi tekrar başlat
+
+          // Tahmin yapıldıktan sonra süreyi yeniden başlatıyoruz
+        clearInterval(sureInterval); // Süreyi durdur
+        sureyiGuncelle(); // Kalan süreyi güncelle
+        sureyiBaslat(); // Süreyi yeniden başlat
+
+
         if (tahmin === gizliKelime.toLowerCase()) {
             kelimeBulundu();
             document.getElementById("guessInput").value = "";
@@ -253,7 +259,8 @@ function sureyiGuncelle() {
 }
 
 function milisaniyeyiFormataCevir(ms) {
-    const minutes = Math.floor(ms / 60000);
-    const seconds = ((ms % 60000) / 1000).toFixed(0);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    const saniye = Math.floor(ms / 1000);
+    const dakika = Math.floor(saniye / 60).toString().padStart(2, '0');
+    const saniyeKalan = (saniye % 60).toString().padStart(2, '0');
+    return `${dakika}:${saniyeKalan}`;
 }
