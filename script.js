@@ -13,7 +13,6 @@ const toplamSoruSayisi = 12;
 let kalanHarfSayisi = 0; // Kalan harf sayısını takip edeceğiz
 let oyunBaslangicZamani; 
 let oyunBitisZamani;// Oyun başlangıç zamanı
-let oyunBittimi=false;
 let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 
 function oyunBaslat() {
@@ -172,8 +171,6 @@ function kelimeBulundu() {
 
 function oyunBitti() {
     clearInterval(sureInterval);
-    if (oyunBittiMi) return; // Eğer oyun zaten bitti ise tekrar çalıştırma
-    oyunBittiMi = true; // Oyunun bittiğini işaretle
 
     oyunBitisZamani = new Date(); // Şu anki tarih ve saati alır
     let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
@@ -263,21 +260,23 @@ function sureyiGuncelle() {
     document.getElementById("timeDisplay").textContent = `Kalan Süre: ${minutes}:${seconds}`;
 }
 
+let durmaZamani = 0; // Durdurulan süreyi saklamak için ek bir değişken
+
 // Süreyi Durdur
 function sureyiDurdur() {
     if (sureInterval) {
         clearInterval(sureInterval); // Mevcut intervali temizle
         sureInterval = null; // Intervali sıfırla
-        sonDurduguZaman = new Date(); // Süre durdurulma zamanını kaydet
+        durmaZamani = new Date(); // Süre durdurulma zamanını kaydet
     }
 }
 
 // Süreyi Kaldığı Yerden Devam Ettir
 function sureyiDevamEttir() {
-    if (sonDurduguZaman) {
-        const durmaSuresi = (new Date() - sonDurduguZaman) / 1000; // Durma süresi saniye cinsinden hesaplanır
-        sure = Math.max(sure - Math.floor(durmaSuresi), 0); // Süreyi kalan süreye göre güncelle
-        sonDurduguZaman = null; // Durdurulan zamanı sıfırla
+    if (durmaZamani) {
+        const gecenSure = (new Date() - durmaZamani) / 1000; // Durma süresi saniye cinsinden hesaplanır
+        sure = Math.max(sure - Math.floor(gecenSure), 0); // Süreyi kalan süreye göre güncelle
+        durmaZamani = null; // Durdurulan zamanı sıfırla
     }
 
     // Eğer süreyi devam ettirmek için bir interval zaten yoksa başlat
@@ -285,6 +284,7 @@ function sureyiDevamEttir() {
         sureyiBaslat(); // Süreyi tekrar başlat
     }
 }
+
 
 
 
