@@ -232,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function sureyiBaslat() {
     sure = 240;
     clearInterval(sureInterval);
+    sureyiGuncelle();
     sureInterval = setInterval(sureyiGuncelle, 1000);
 }
 
