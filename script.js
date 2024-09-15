@@ -14,6 +14,7 @@ let oyunBaslangicZamani;
 let oyunBitisZamani; // Oyun başlangıç zamanı
 let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
 let sureDurmaZamani; // Sürenin durduğu zamanı saklamak için
+let sureDevamEttirildi; // Sürenin devam ettirilip ettirilmediğini kontrol etmek için
 
 function oyunBaslat() {
     oyunBaslangicZamani = new Date(); // Oyun başlangıç zamanını kaydet
@@ -212,16 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById("submitGuessBtn").addEventListener("click", () => {
         if (oyunBitti) return;
-        let tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
+        const tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
         document.getElementById("guessSection").style.display = "none";
 
         if (tahmin === gizliKelime.toLowerCase()) {
             kelimeBulundu();
-            document.getElementById("guessInput").value = "";
         } else {
             const hataliSes = new Audio('sound/wrong.mp3');
             hataliSes.play();
-            document.getElementById("guessInput").value = "";
         }
 
         // Tahmin gönderildikten sonra süreyi devam ettir
@@ -264,12 +263,12 @@ function sureyiDurdur() {
 // Süreyi Kaldığı Yerden Devam Ettir
 function sureyiDevamEttir() {
     if (sureDurmaZamani) {
+        // Süreyi durdurduğumuz zaman ile şu anki zaman arasındaki farkı hesaplayın
         const durmaSuresi = (new Date() - sureDurmaZamani) / 1000; // Durma süresi saniye cinsinden hesaplanır
-        sure = Math.max(sure - Math.floor(durmaSuresi), 0); // Süreyi kalan süreye göre güncelle
         sureDurmaZamani = null; // Durdurulan zamanı sıfırla
     }
 
-    // Eğer süreyi devam ettirmek için bir interval zaten yoksa başlat
+    // Süreyi devam ettirmek için bir interval zaten yoksa başlat
     if (!sureInterval) {
         sureyiBaslat(); // Süreyi tekrar başlat
     }
