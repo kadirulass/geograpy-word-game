@@ -64,6 +64,7 @@ h1 {
 
 #scoreTable .second-place {
     background-color: #ffff00; /* 2. olanın arka plan rengi: sarı */
+    color: #000000;
 }
 
 /* Buton stili */
