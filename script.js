@@ -276,8 +276,11 @@ function sureyiDevamEttir() {
 }
 
 function milisaniyeyiFormataCevir(ms) {
+    // Toplam saniyeyi hesapla
     const saniye = Math.floor(ms / 1000);
-    const dakika = Math.floor(saniye / 60).toString().padStart(2, '0');
-    const saniyeKalan = (saniye % 60).toString().padStart(2, '0');
-    return `${dakika}:${saniyeKalan}`;
+    // Toplam dakikayı ve saniyeyi hesapla
+    const dakika = Math.floor(saniye / 60);
+    const saniyeKalan = saniye % 60;
+    // Dakikayı ve saniyeyi iki basamaklı formatta döndür
+    return `${dakika.toString().padStart(2, '0')}:${saniyeKalan.toString().padStart(2, '0')}`;
 }
