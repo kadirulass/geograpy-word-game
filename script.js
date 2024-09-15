@@ -239,7 +239,7 @@ function sureyiBaslat() {
 function sureyiGuncelle() {
     const minutes = Math.floor(sure / 60);
     const seconds = sure % 60;
-    document.getElementById("timer").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    document.getElementById("timeDisplay").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     sure--;
 
     if (sure < 0) {
