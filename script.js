@@ -4,7 +4,8 @@ let kelimeSayisi = 0;
 let gizliKelime = "";
 let kelimeGorunumu = [];
 let harfler = [];
-let sure = 240; // 4 dakika
+let sure = 240;
+let sonDurduguZaman; // 4 dakika
 let sureInterval;
 let sorulmusKelimeler = [];
 let soruSayisi = 0;
@@ -220,8 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
         document.getElementById("guessSection").style.display = "none";
 
-          // Tahmin yapıldıktan sonra süreyi yeniden başlatıyoruz
-        sureyiBaslat(); // Süreyi yeniden başlat
+         sureyiDevamEttir();
 
 
         if (tahmin === gizliKelime.toLowerCase()) {
@@ -244,19 +244,27 @@ function sureyiBaslat() {
 }
 
 function sureyiGuncelle() {
-    const minutes = Math.floor(sure / 60);
-    const seconds = sure % 60;
-    document.getElementById("timeDisplay").textContent = `Kalan Süre: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    sure--;
-
-    if (sure < 0) {
-        clearInterval(sureInterval);
-        alert('Süre doldu! Oyun bitti.');
-        oyunBitti();
-    }
+    const minutes = String(Math.floor(sure / 60)).padStart(2, '0');
+    const seconds = String(sure % 60).padStart(2, '0');
+    document.getElementById("timeDisplay").textContent = `Kalan Süre: ${minutes}:${seconds}`;
 }
+
 function sureyiDurdur() {
     clearInterval(sureInterval);
+    sonDurduguZaman = new Date();
+}
+function sureyiDevamEttir() {
+    if (sonDurduguZaman) {
+        // Durma süresini hesapla
+        const durmaSuresi = new Date() - sonDurduguZaman;
+        sure -= Math.floor(durmaSuresi / 1000); // Durma süresini saniye cinsinden hesapla
+        if (sure < 0) sure = 0; // Süreyi negatif olmasına engel ol
+        sureyiGuncelle();
+        sureyiBaslat(); // Süreyi tekrar başlat
+    } else {
+        sureyiBaslat(); // İlk defa başlatıyorsak sadece başlat
+    }
+    sonDurduguZaman = null; // Durma zamanını sıfırla
 }
 
 function milisaniyeyiFormataCevir(ms) {
