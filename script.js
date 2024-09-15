@@ -11,10 +11,15 @@ let sorulmusKelimeler = [];
 let soruSayisi = 0;
 const toplamSoruSayisi = 12;
 let kalanHarfSayisi = 0; // Kalan harf sayısını takip edeceğiz
-let oyunBaslangicZamani; // Oyun başlangıç zamanı
-let oyunBitisZamani; // Oyun bitiş zamanı
-
+let oyunBaslangicZamani; 
+let oyunBitisZamani;// Oyun başlangıç zamanı
+let oyunBittimi=false;
 let kelimeler = {}; // JSON'dan gelecek veriyi tutmak için
+
+function oyunBaslat() {
+    oyunBaslangicZamani = new Date(); // Oyun başlangıç zamanını kaydet
+    sureyiBaslat(); // Zamanlayıcı başlatılır
+}
 
 // Veritabanından kelimeleri yükle
 fetch('https://cografya-kelime-oyunu.onrender.com/get-questions')
@@ -32,11 +37,7 @@ fetch('https://cografya-kelime-oyunu.onrender.com/get-questions')
         }, {});
 
         kelimeSec(); // Oyun başladığında ilk kelime seçimi yapılır
-        sureyiBaslat(); // Zamanlayıcı başlatılır
-        sureyiGuncelle();
-
-        // Oyun başlama zamanını kaydediyoruz
-        oyunBaslangicZamani = new Date();
+        oyunBaslat();
     })
     .catch(error => {
         console.error('Kelimeler verisi yüklenirken hata oluştu:', error);
@@ -171,6 +172,8 @@ function kelimeBulundu() {
 
 function oyunBitti() {
     clearInterval(sureInterval);
+    if (oyunBittiMi) return; // Eğer oyun zaten bitti ise tekrar çalıştırma
+    oyunBittiMi = true; // Oyunun bittiğini işaretle
 
     oyunBitisZamani = new Date(); // Şu anki tarih ve saati alır
     let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
