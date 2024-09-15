@@ -166,13 +166,16 @@ function kelimeBulundu() {
 
 function oyunBitti() {
     clearInterval(sureInterval);
-     // Oyun bitiş zamanını kaydet
-     oyunBitisZamani = new Date(); // Şu anki tarih ve saati alır
 
-     // Oyun süresini hesapla (milisaniye cinsinden)
-     let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
- 
-     const sureStr = milisaniyeyiFormataCevir(gecenSure);
+    // Oyun bitiş zamanını kaydet
+    oyunBitisZamani = new Date(); // Şu anki tarih ve saati alır
+
+    // Oyun süresini hesapla (milisaniye cinsinden)
+    let oyunSuresiMs = oyunBitisZamani - oyunBaslangicZamani;
+
+    // Milisaniyeyi formatlayarak okunabilir bir süreye dönüştür
+    const formatliSure = milisaniyeyiFormataCevir(oyunSuresiMs);
+
     const kullaniciAdi = prompt('Oyun bitti! Kullanıcı adınızı girin:');
     if (kullaniciAdi) {
         fetch('https://cografya-kelime-oyunu.onrender.com/add-score', {
@@ -190,10 +193,11 @@ function oyunBitti() {
         })
         .catch(error => console.error('Hata:', error));
     }
-    else{
+    else {
         window.location.href = 'index.html'; // Hata durumunda da yönlendirme yap
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Oyun bitiş durumu
