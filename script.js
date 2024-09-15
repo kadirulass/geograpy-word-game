@@ -219,11 +219,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (oyunBitti) return;
         let tahmin = document.getElementById("guessInput").value.toLowerCase().trim();
         document.getElementById("guessSection").style.display = "none";
+        sureyiBaslat(); // Süreyi tekrar başlat
         if (tahmin === gizliKelime.toLowerCase()) {
             kelimeBulundu();
+            document.getElementById("guessInput").value = "";
         } else {
-            alert("Yanlış tahmin!");
-            sureyiBaslat(); // Süreyi yeniden başlat
+            const hataliSes = new Audio('sound/wrong.mp3');
+            hataliSes.play();
+            document.getElementById("guessInput").value = "";
         }
         document.getElementById("guessInput").value = ""; // Tahmin kutusunu temizle
     });
